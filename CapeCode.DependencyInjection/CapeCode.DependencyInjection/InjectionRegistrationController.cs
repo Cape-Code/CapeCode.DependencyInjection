@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using CapeCode.DependencyInjection.Interfaces;
+using CapeCode.ExtensionMethods;
 using Microsoft.Practices.Unity;
 
 namespace CapeCode.DependencyInjection {
@@ -351,10 +352,8 @@ namespace CapeCode.DependencyInjection {
                 }
 #if DEBUG
                 var containerRegistrations = container.Registrations;
-
-                var registrationsByNameAndType = containerRegistrations.Where( r => r.Name != null )
-                    .GroupBy( r => r.RegisteredType )
-                    .ToDictionary( g => g.Key, g => g.ToDictionary( r => r.Name, r => r.RegisteredType ));
+                
+                var registrationsByNameAndType = containerRegistrations.Where( r => r.Name == null ).ToDictionaryDictionary( k => k.RegisteredType, k => k.Name, v => v.RegisteredType );
                 var registrationsByType = containerRegistrations.Where( r => r.Name == null ).ToDictionary( k => k.RegisteredType, v => v.RegisteredType );
 #endif
 

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("CapeCode.DependencyInjection")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Cape Code Gmbh & Co. KG")]
 [assembly: AssemblyProduct("CapeCode.DependencyInjection")]
 [assembly: AssemblyCopyright("Copyright © Cape Code Gmbh & Co. KG 2017")]
 [assembly: AssemblyTrademark("")]
