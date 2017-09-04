@@ -56,6 +56,10 @@
   <ItemGroup>
     <Compile Include="AssembliesCache.cs" />
     <Compile Include="DependencyResolver.cs" />
+    <Compile Include="ExtendedList\ChangeArgs.cs" />
+    <Compile Include="ExtendedList\ChangeType.cs" />
+    <Compile Include="ExtendedList\ExtendedList.cs" />
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="InjectionManager.cs" />
     <Compile Include="InjectionRegistrationController.cs" />
     <Compile Include="Intefaces\AssemblyInjectionTagAttribute.cs" />
