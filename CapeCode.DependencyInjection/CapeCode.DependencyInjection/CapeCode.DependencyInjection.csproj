@@ -62,6 +62,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="NuGet.Build.Tasks.Pack">
+      <Version>4.9.1</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Unity">
       <Version>4.0.1</Version>
     </PackageReference>
