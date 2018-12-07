@@ -58,6 +58,7 @@
     <ProjectReference Include="..\CapeCode.DependencyInjection.Interfaces\CapeCode.DependencyInjection.Interfaces.csproj">
       <Project>{3467c0bd-f775-4c27-9fd7-b5d4fc02aa0b}</Project>
       <Name>CapeCode.DependencyInjection.Interfaces</Name>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
