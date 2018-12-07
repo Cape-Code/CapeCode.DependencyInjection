@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Cape Code GmbH &amp; Co. KG</Authors>
     <Company>Cape Code GmbH &amp; Co. KG</Company>
     <Copyright>Copyright © Cape Code Gmbh &amp; Co. KG 2018</Copyright>
