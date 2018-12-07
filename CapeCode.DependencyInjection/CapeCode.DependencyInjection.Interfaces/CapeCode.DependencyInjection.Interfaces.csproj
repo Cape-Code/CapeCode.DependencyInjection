@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Cape Code GmbH &amp; Co. KG</Authors>
+    <Company>Cape Code GmbH &amp; Co. KG</Company>
+    <Copyright>Cape Code GmbH &amp; Co. KG</Copyright>
   </PropertyGroup>
 
 </Project>
