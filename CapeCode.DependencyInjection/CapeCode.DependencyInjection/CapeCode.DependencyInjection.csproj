@@ -62,28 +62,18 @@
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="InjectionManager.cs" />
     <Compile Include="InjectionRegistrationController.cs" />
-    <Compile Include="Intefaces\AssemblyInjectionTagAttribute.cs" />
-    <Compile Include="Intefaces\FrameworkCommonAssemblyInjectionTagAttribute.cs" />
-    <Compile Include="Intefaces\IAssembliesCache.cs" />
-    <Compile Include="Intefaces\IDependencyResolver.cs" />
-    <Compile Include="Intefaces\IInjectionManager.cs" />
-    <Compile Include="Intefaces\InjectAsGlobalSingleton.cs" />
-    <Compile Include="Intefaces\InjectAsNewInstance.cs" />
-    <Compile Include="Intefaces\InjectAsNewInstancePerResolve.cs" />
-    <Compile Include="Intefaces\InjectAsScopedSingleton.cs" />
-    <Compile Include="Intefaces\InjectAsThreadSingleton.cs" />
-    <Compile Include="Intefaces\InjectInListAttribute.cs" />
-    <Compile Include="Intefaces\InjectionEnumRestrictionAttribute.cs" />
-    <Compile Include="Intefaces\InjectionExplicitOverrideAttribute.cs" />
-    <Compile Include="Intefaces\InjectionRegistrationAttribute.cs" />
-    <Compile Include="Intefaces\InjectionRegistrationException.cs" />
-    <Compile Include="Intefaces\InjectionScopeException.cs" />
     <Compile Include="ListInjectionProxy.cs" />
     <Compile Include="ListInjectionRegistrationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CapeCode.DependencyInjection.Interfaces\CapeCode.DependencyInjection.Interfaces.csproj">
+      <Project>{3467c0bd-f775-4c27-9fd7-b5d4fc02aa0b}</Project>
+      <Name>CapeCode.DependencyInjection.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
