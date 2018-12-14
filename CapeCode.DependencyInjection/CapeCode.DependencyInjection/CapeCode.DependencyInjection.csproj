@@ -30,18 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -56,34 +44,31 @@
   <ItemGroup>
     <Compile Include="AssembliesCache.cs" />
     <Compile Include="DependencyResolver.cs" />
-    <Compile Include="ExtendedList\ChangeArgs.cs" />
-    <Compile Include="ExtendedList\ChangeType.cs" />
-    <Compile Include="ExtendedList\ExtendedList.cs" />
-    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="InjectionManager.cs" />
     <Compile Include="InjectionRegistrationController.cs" />
-    <Compile Include="Intefaces\AssemblyInjectionTagAttribute.cs" />
-    <Compile Include="Intefaces\FrameworkCommonAssemblyInjectionTagAttribute.cs" />
-    <Compile Include="Intefaces\IAssembliesCache.cs" />
-    <Compile Include="Intefaces\IDependencyResolver.cs" />
-    <Compile Include="Intefaces\IInjectionManager.cs" />
-    <Compile Include="Intefaces\InjectAsGlobalSingleton.cs" />
-    <Compile Include="Intefaces\InjectAsNewInstance.cs" />
-    <Compile Include="Intefaces\InjectAsNewInstancePerResolve.cs" />
-    <Compile Include="Intefaces\InjectAsScopedSingleton.cs" />
-    <Compile Include="Intefaces\InjectAsThreadSingleton.cs" />
-    <Compile Include="Intefaces\InjectInListAttribute.cs" />
-    <Compile Include="Intefaces\InjectionEnumRestrictionAttribute.cs" />
-    <Compile Include="Intefaces\InjectionExplicitOverrideAttribute.cs" />
-    <Compile Include="Intefaces\InjectionRegistrationAttribute.cs" />
-    <Compile Include="Intefaces\InjectionRegistrationException.cs" />
-    <Compile Include="Intefaces\InjectionScopeException.cs" />
     <Compile Include="ListInjectionProxy.cs" />
     <Compile Include="ListInjectionRegistrationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\CapeCode.DependencyInjection.Interfaces\CapeCode.DependencyInjection.Interfaces.csproj">
+      <Project>{3467c0bd-f775-4c27-9fd7-b5d4fc02aa0b}</Project>
+      <Name>CapeCode.DependencyInjection.Interfaces</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NuGet.Build.Tasks.Pack">
+      <Version>4.9.1</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Unity">
+      <Version>4.0.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CapeCode.DependencyInjection.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

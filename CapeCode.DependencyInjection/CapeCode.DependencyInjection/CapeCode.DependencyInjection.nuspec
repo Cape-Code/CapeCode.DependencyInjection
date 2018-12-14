@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>CapeCode.DependencyInjection</id>
+    <version>$Version$</version>
+    <title>CapeCode.DependencyInjection</title>
+    <authors>Cape Code Gmbh &amp; Co. KG</authors>
+    <owners>Cape Code Gmbh &amp; Co. KG</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Description</description>
+    <copyright>Copyright © Cape Code Gmbh &amp; Co. KG 2017</copyright>
+    <dependencies>
+      <dependency id="Unity" version="4.0.1" />
+      <dependency id="CapeCode.DependencyInjection.Interfaces" version="$Version$" />
+    </dependencies>    
+  </metadata>
+</package>
