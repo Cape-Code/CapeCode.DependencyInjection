@@ -4,7 +4,7 @@ using System.Linq;
 using CapeCode.DependencyInjection.Interfaces;
 
 namespace CapeCode.DependencyInjection {
-    //[InjectAsGlobalSingleton]
+    [InjectAsGlobalSingleton]
     class ListInjectionRegistrationManager {
 
         private readonly IDictionary<Type, HashSet<Type>> _registeredTypesByListInterfaceType = new Dictionary<Type, HashSet<Type>>();

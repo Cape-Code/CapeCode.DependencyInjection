@@ -207,11 +207,11 @@ namespace CapeCode.DependencyInjection {
                             } else {
 
                                 if ( registrationAttribute.GetType() == typeof( InjectAsScopedSingleton ) ) {
-                                    throw new NotImplementedException( ".net Core Dependency Injection does not support child containers." );
+                                    throw new NotImplementedException( "InjectAsScopedSingleton attribute not valid in " + type.FullName + " because .net Core Dependency Injection does not support child containers." );
                                 } else if ( registrationAttribute.GetType() == typeof( InjectAsThreadSingleton ) ) {
-                                    throw new NotImplementedException( ".net Core Dependency Injection does not keep track of threads. Try using RequestScope based injection instead." );
+                                    throw new NotImplementedException( "InjectAsThreadSingleton attribute not valid in " + type.FullName + " because .net Core Dependency Injection does not keep track of threads. Try using RequestScope based injection instead." );
                                 } else if ( registrationAttribute.GetType() == typeof( InjectAsNewInstancePerResolve ) ) {
-                                    throw new NotImplementedException( ".net Core Dependency Injection does not keep track of resolves. Try using RequestScope based injection instead." );
+                                    throw new NotImplementedException( "InjectAsNewInstancePerResolve attribute not valid in " + type.FullName + " because .net Core Dependency Injection does not keep track of resolves. Try using RequestScope based injection instead." );
                                 }
 
                                 // Check what kind of injection is desired.
