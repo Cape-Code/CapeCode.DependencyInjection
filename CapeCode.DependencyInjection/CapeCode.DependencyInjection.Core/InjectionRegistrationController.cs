@@ -240,8 +240,8 @@ namespace CapeCode.DependencyInjection {
                                     throw new InjectionRegistrationException( interfaceType, type, "Type " + interfaceType.FullName + " of " + type.FullName + " can not be registered for list injection, since it does not implement this type." );
                                 }
 
-                                var listInjectionRegistrationManager = ServiceCollection.BuildServiceProvider().GetService<ListInjectionRegistrationManager>();
-                                listInjectionRegistrationManager.RegisterTypeForListInterfaceType( type, interfaceType );
+                                //var listInjectionRegistrationManager = ServiceCollection.BuildServiceProvider().GetService<ListInjectionRegistrationManager>();
+                                _listInjectionRegistrationManager.RegisterTypeForListInterfaceType( type, interfaceType );
 
 
                                 Type listInjectionType = typeof( IEnumerable<> ).MakeGenericType( interfaceType );
