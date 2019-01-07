@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapeCode.DependencyInjection", "CapeCode.DependencyInjection\CapeCode.DependencyInjection.csproj", "{22291F2D-128D-4D7C-B624-05A7B2441D2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapeCode.DependencyInjection.Interfaces", "CapeCode.DependencyInjection.Interfaces\CapeCode.DependencyInjection.Interfaces.csproj", "{3467C0BD-F775-4C27-9FD7-B5D4FC02AA0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CapeCode.DependencyInjection.Interfaces", "CapeCode.DependencyInjection.Interfaces\CapeCode.DependencyInjection.Interfaces.csproj", "{3467C0BD-F775-4C27-9FD7-B5D4FC02AA0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapeCode.DependencyInjection.Core", "CapeCode.DependencyInjection.Core\CapeCode.DependencyInjection.Core.csproj", "{FFE4D207-D99B-4967-B316-528B4B15C3BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{3467C0BD-F775-4C27-9FD7-B5D4FC02AA0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3467C0BD-F775-4C27-9FD7-B5D4FC02AA0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3467C0BD-F775-4C27-9FD7-B5D4FC02AA0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFE4D207-D99B-4967-B316-528B4B15C3BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFE4D207-D99B-4967-B316-528B4B15C3BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFE4D207-D99B-4967-B316-528B4B15C3BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFE4D207-D99B-4967-B316-528B4B15C3BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
