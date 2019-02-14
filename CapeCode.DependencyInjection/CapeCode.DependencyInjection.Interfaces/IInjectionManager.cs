@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 namespace CapeCode.DependencyInjection.Interfaces {
+    [Obsolete]
     public interface IInjectionManager {
 
         object Resolve( Type type );

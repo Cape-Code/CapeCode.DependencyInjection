@@ -1,6 +1,7 @@
 ﻿using System;
 
 namespace CapeCode.DependencyInjection.Interfaces {
+    [Obsolete]
     public interface IDependencyResolver {
         bool IsRegistered( Type type );
         object Resolve( Type type );

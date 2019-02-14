@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace CapeCode.DependencyInjection.Interfaces {
-    public class InjectAsNewInstance : InjectionRegistrationAttribute {
+    public class InjectAsNewInstanceAttribute : InjectionRegistrationAttribute {
 
         public InjectAsNewInstance( params Type[] registeredInterfaces )
             : base( registeredInterfaces ) { }
