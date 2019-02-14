@@ -1,5 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using CapeCode.DependencyInjection;
+using CapeCode.DependencyInjection.Core;
+using CapeCode.DependencyInjection.Interfaces;
 
 namespace Microsoft.Extensions.DependencyInjection.Core {
     public static class DependencyInjectionExtension {
