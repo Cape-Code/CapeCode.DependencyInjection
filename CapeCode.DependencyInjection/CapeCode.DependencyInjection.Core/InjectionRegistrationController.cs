@@ -34,10 +34,10 @@ namespace CapeCode.DependencyInjection.Core {
 					// Filter attributes to have only attributes for arbitrary environments and attributes fitting to the current environment.
 					var isEnvironmentCorrect = type.EvaluateDerivedCustomAttributePredicate<InjectionEnumRestrictionAttribute>( era => era.ValidEnumValues.Any( vev => _enumRestrictions.Any( ev => Equals( ev, vev ) ) ), trueIfEmpty: true );
 
-					var registrationAttributes = type.GetSingleCustomDerivedAttribute<InjectionRegistrationAttribute>().ToList();
+					var registrationAttributes = type.GetSingleCustomDerivedAttribute<InjectionRegistrationAttribute>();
 
 					if ( registrationAttributes.Any() && isEnvironmentCorrect ) {
-						var injectInListAttributes = type.GetSingleCustomAttribute<InjectInListAttribute>().ToList();
+						var injectInListAttributes = type.GetSingleCustomAttribute<InjectInListAttribute>();
 
 						var registrationAttribute = registrationAttributes.First();
 						Type[] interfaceTypes;
