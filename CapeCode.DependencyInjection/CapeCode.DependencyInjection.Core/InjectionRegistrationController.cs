@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using CapeCode.DependencyInjection.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Core;
 
 namespace CapeCode.DependencyInjection.Core {
 	public class InjectionRegistrationController {

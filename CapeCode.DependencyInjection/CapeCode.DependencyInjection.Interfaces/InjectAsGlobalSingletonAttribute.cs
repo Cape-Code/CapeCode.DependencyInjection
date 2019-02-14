@@ -3,9 +3,9 @@
 namespace CapeCode.DependencyInjection.Interfaces {
     public class InjectAsGlobalSingletonAttribute : InjectionRegistrationAttribute {
 
-        public InjectAsGlobalSingleton( params Type[] registeredInterfaces )
+        public InjectAsGlobalSingletonAttribute( params Type[] registeredInterfaces )
             : base( registeredInterfaces ) { }
 
-        public InjectAsGlobalSingleton() : base() { }
+        public InjectAsGlobalSingletonAttribute() : base() { }
     }
 }
