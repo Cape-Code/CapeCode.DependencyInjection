@@ -237,13 +237,13 @@ namespace CapeCode.DependencyInjection {
                                     }
 
                                     this._registrationsForInterfacesForScopeTypes[ scopedSingeltonAttribute.ScopeRelatedTo ][ interfaceType ] = new InstanceDependendScopeRegistration( registeredInterface: interfaceType, registeredToClass: type );
-                                } else if ( registrationAttribute.GetType() == typeof( InjectAsGlobalSingleton ) ) {
+                                } else if ( registrationAttribute.GetType() == typeof( InjectAsGlobalSingletonAttribute ) ) {
                                     MainContainer.RegisterType( interfaceType, type, new ContainerControlledLifetimeManager() );
                                 } else if ( registrationAttribute.GetType() == typeof( InjectAsThreadSingleton ) ) {
                                     MainContainer.RegisterType( interfaceType, type, new PerThreadLifetimeManager() );
                                 } else if ( registrationAttribute.GetType() == typeof( InjectAsNewInstancePerResolve ) ) {
                                     MainContainer.RegisterType( interfaceType, type, new PerResolveLifetimeManager() );
-                                } else if ( registrationAttribute.GetType() == typeof( InjectAsNewInstance ) ) {
+                                } else if ( registrationAttribute.GetType() == typeof( InjectAsNewInstanceAttribute ) ) {
                                     MainContainer.RegisterType( interfaceType, type );
                                 } else {
                                     // An implementation of IInjcetionScopeAttribute was given, but is not supported.

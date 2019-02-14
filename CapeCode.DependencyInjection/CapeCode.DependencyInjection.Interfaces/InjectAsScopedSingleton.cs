@@ -1,6 +1,7 @@
 ﻿using System;
 
 namespace CapeCode.DependencyInjection.Interfaces {
+    [Obsolete]
     public class InjectAsScopedSingleton : InjectionRegistrationAttribute {
         public Type ScopeRelatedTo { get; set; }
 
