@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>netcoreapp2.2</TargetFramework>
-		<TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+		<TargetFramework>netcoreapp2.1</TargetFramework>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\CapeCode.DependencyInjection.Interfaces\CapeCode.DependencyInjection.Interfaces.csproj" />

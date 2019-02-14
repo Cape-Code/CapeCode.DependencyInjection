@@ -3,9 +3,9 @@
 namespace CapeCode.DependencyInjection.Interfaces {
     public class InjectAsNewInstanceAttribute : InjectionRegistrationAttribute {
 
-        public InjectAsNewInstance( params Type[] registeredInterfaces )
+        public InjectAsNewInstanceAttribute( params Type[] registeredInterfaces )
             : base( registeredInterfaces ) { }
 
-        public InjectAsNewInstance() : base() { }
+        public InjectAsNewInstanceAttribute() : base() { }
     }
 }

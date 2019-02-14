@@ -2,9 +2,9 @@
 
 namespace CapeCode.DependencyInjection.Interfaces {
     public class InjectAsRequestSingletonAttribute : InjectionRegistrationAttribute {
-        public InjectAsRequestSingleton( params Type[] registeredInterfaces )
+        public InjectAsRequestSingletonAttribute( params Type[] registeredInterfaces )
             : base( registeredInterfaces ) { }
 
-        public InjectAsRequestSingleton() : base() { }
+        public InjectAsRequestSingletonAttribute() : base() { }
     }
 }
