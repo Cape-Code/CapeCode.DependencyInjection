@@ -225,8 +225,8 @@ namespace CapeCode.DependencyInjection {
                             } else {
 
                                 // Check what kind of injection is desired.
-                                if ( registrationAttribute.GetType() == typeof( InjectAsScopedSingleton ) ) {
-                                    InjectAsScopedSingleton scopedSingeltonAttribute = ( InjectAsScopedSingleton ) registrationAttribute;
+                                if ( registrationAttribute.GetType() == typeof( InjectAsScopedSingletonAttribute ) ) {
+                                    var scopedSingeltonAttribute = ( InjectAsScopedSingletonAttribute ) registrationAttribute;
                                     // Interfaces may only be scoped for one type to prevent confusion
                                     if ( registeredForType != null && registeredForType != scopedSingeltonAttribute.ScopeRelatedTo ) {
                                         // Only registrations of inherited types may be overwritten. An alternative branch to an already registered type may not be registered.
@@ -239,9 +239,9 @@ namespace CapeCode.DependencyInjection {
                                     this._registrationsForInterfacesForScopeTypes[ scopedSingeltonAttribute.ScopeRelatedTo ][ interfaceType ] = new InstanceDependendScopeRegistration( registeredInterface: interfaceType, registeredToClass: type );
                                 } else if ( registrationAttribute.GetType() == typeof( InjectAsGlobalSingletonAttribute ) ) {
                                     MainContainer.RegisterType( interfaceType, type, new ContainerControlledLifetimeManager() );
-                                } else if ( registrationAttribute.GetType() == typeof( InjectAsThreadSingleton ) ) {
+                                } else if ( registrationAttribute.GetType() == typeof( InjectAsThreadSingletonAttribute ) ) {
                                     MainContainer.RegisterType( interfaceType, type, new PerThreadLifetimeManager() );
-                                } else if ( registrationAttribute.GetType() == typeof( InjectAsNewInstancePerResolve ) ) {
+                                } else if ( registrationAttribute.GetType() == typeof( InjectAsNewInstancePerResolveAttribute ) ) {
                                     MainContainer.RegisterType( interfaceType, type, new PerResolveLifetimeManager() );
                                 } else if ( registrationAttribute.GetType() == typeof( InjectAsNewInstanceAttribute ) ) {
                                     MainContainer.RegisterType( interfaceType, type );

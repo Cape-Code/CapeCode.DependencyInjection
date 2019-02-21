@@ -2,10 +2,10 @@
 
 namespace CapeCode.DependencyInjection.Interfaces {
     [Obsolete]
-    public class InjectAsThreadSingleton : InjectionRegistrationAttribute {
-        public InjectAsThreadSingleton( params Type[] registeredInterfaces )
+    public class InjectAsThreadSingletonAttribute : InjectionRegistrationAttribute {
+        public InjectAsThreadSingletonAttribute( params Type[] registeredInterfaces )
             : base( registeredInterfaces ) { }
 
-        public InjectAsThreadSingleton() : base() { }
+        public InjectAsThreadSingletonAttribute() : base() { }
     }
 }

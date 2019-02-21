@@ -2,15 +2,15 @@
 
 namespace CapeCode.DependencyInjection.Interfaces {
     [Obsolete]
-    public class InjectAsScopedSingleton : InjectionRegistrationAttribute {
+    public class InjectAsScopedSingletonAttribute : InjectionRegistrationAttribute {
         public Type ScopeRelatedTo { get; set; }
 
-        public InjectAsScopedSingleton( Type scopeRelatedTo, params Type[] registeredInterfaces )
+        public InjectAsScopedSingletonAttribute( Type scopeRelatedTo, params Type[] registeredInterfaces )
             : base( registeredInterfaces ) {
             ScopeRelatedTo = scopeRelatedTo;
         }
 
-        public InjectAsScopedSingleton( Type scopeRelatedTo )
+        public InjectAsScopedSingletonAttribute( Type scopeRelatedTo )
             : base() {
             ScopeRelatedTo = scopeRelatedTo;
         }
