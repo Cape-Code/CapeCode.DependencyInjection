@@ -2,11 +2,11 @@
 
 namespace CapeCode.DependencyInjection.Interfaces {
     [Obsolete]
-    public class InjectAsNewInstancePerResolve : InjectionRegistrationAttribute {
+    public class InjectAsNewInstancePerResolveAttribute : InjectionRegistrationAttribute {
 
-        public InjectAsNewInstancePerResolve( params Type[] registeredInterfaces )
+        public InjectAsNewInstancePerResolveAttribute( params Type[] registeredInterfaces )
             : base( registeredInterfaces ) { }
 
-        public InjectAsNewInstancePerResolve() : base() { }
+        public InjectAsNewInstancePerResolveAttribute() : base() { }
     }
 }
