@@ -17,19 +17,19 @@ namespace CapeCode.DependencyInjection {
             }
         }
 
-        public void RegisterTypeForListInterfaceType( Type registeredType, Type listInterfaceType, bool removeSubtypesFromList = false ) {
+        public void RegisterTypeForListInterfaceType( Type registeredType, Type listInterfaceType ) {
             if ( listInterfaceType != null ) {
                 if ( !_registeredTypesByListInterfaceType.ContainsKey( listInterfaceType ) ) {
                     _registeredTypesByListInterfaceType[ listInterfaceType ] = new HashSet<Type>();
                 }
                 if ( !_registeredTypesByListInterfaceType[ listInterfaceType ].Contains( registeredType ) ) {
-                    _registeredTypesByListInterfaceType[ listInterfaceType ].Add( registeredType );
+                    if ( !_registeredTypesByListInterfaceType[ listInterfaceType ].Any( t => t.IsSubclassOf( registeredType ) ) ) {
+                        _registeredTypesByListInterfaceType[ listInterfaceType ].Add( registeredType );
+                    }
                 }
-                if ( removeSubtypesFromList ) {
-                    foreach ( var oldRegistration in _registeredTypesByListInterfaceType[ listInterfaceType ].ToList() ) {
-                        if ( registeredType.IsSubclassOf( oldRegistration ) ) {
-                            _registeredTypesByListInterfaceType[ listInterfaceType ].Remove( oldRegistration );
-                        }
+                foreach ( var oldRegistration in _registeredTypesByListInterfaceType[ listInterfaceType ].ToList() ) {
+                    if ( registeredType.IsSubclassOf( oldRegistration ) ) {
+                        _registeredTypesByListInterfaceType[ listInterfaceType ].Remove( oldRegistration );
                     }
                 }
             }
