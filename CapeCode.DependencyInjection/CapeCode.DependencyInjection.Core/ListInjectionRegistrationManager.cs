@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CapeCode.DependencyInjection.Interfaces;
 
-namespace CapeCode.DependencyInjection {
+namespace CapeCode.DependencyInjection.Core {
     [InjectAsGlobalSingleton]
     class ListInjectionRegistrationManager {
 

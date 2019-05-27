@@ -30,7 +30,7 @@ namespace CapeCode.DependencyInjection {
         private readonly IDictionary<Type, IList<Type>> _registrationsForDataContracts = new Dictionary<Type, IList<Type>>();
 
         private readonly IAssembliesCache _assembliesCache = new AssembliesCache();
-        
+
         private readonly IList<object> _enumRestrictions;
 
         // Manages the registration for Interfaces that inject a singelton depending on a given scope object.
@@ -101,7 +101,7 @@ namespace CapeCode.DependencyInjection {
         }
 
         public void RegisterTypes( IList<Type> types ) {
-            foreach ( Type type in types ) {
+            foreach ( var type in types ) {
                 RegisterType( type );
             }
         }
@@ -112,7 +112,7 @@ namespace CapeCode.DependencyInjection {
                     bool isEnvironmentCorrect = true;
                     IList<InjectionEnumRestrictionAttribute> enumRestrictionAttributes = type.GetCustomAttributes( false ).Where( attr => attr.GetType().IsSubclassOf( typeof( InjectionEnumRestrictionAttribute ) ) ).Cast<InjectionEnumRestrictionAttribute>().ToList<InjectionEnumRestrictionAttribute>();
                     // Filter attributes to have only attributes for arbitrary environments and attributes fitting to the current environment.
-                    if( enumRestrictionAttributes.Any() ) {
+                    if ( enumRestrictionAttributes.Any() ) {
                         isEnvironmentCorrect = enumRestrictionAttributes.All( era => era.ValidEnumValues.Any( vev => _enumRestrictions.Any( ev => Equals( ev, vev ) ) ) );
                     }
 
@@ -163,7 +163,7 @@ namespace CapeCode.DependencyInjection {
                             }
                         }
 
-                        foreach ( Type interfaceType in interfaceTypes ) {
+                        foreach ( var interfaceType in interfaceTypes ) {
                             // TODO check via name, namespace, assembly and generic type arguments (via interfaces) if the interface types is equal to the type
                             if ( !interfaceType.GetGenericArguments().Any() && !interfaceType.IsAssignableFrom( type ) ) {
                                 // A class may only be registered for type is declares. There might be an interface declared in the attribute which does not fit to the class.
@@ -174,14 +174,14 @@ namespace CapeCode.DependencyInjection {
                             if ( interfaceType.IsInterface && interfaceType.IsDefined( typeof( ServiceContractAttribute ), false ) ) {
                                 if ( !ServiceContracts.Contains( interfaceType ) ) {
                                     bool serviceAlreadyRegistered = false;
-                                    foreach ( Type serviceContract in ServiceContracts ) {
+                                    foreach ( var serviceContract in ServiceContracts ) {
                                         if ( interfaceType.IsAssignableFrom( serviceContract ) ) {
                                             serviceAlreadyRegistered = true;
                                             break;
                                         }
                                     }
                                     if ( !serviceAlreadyRegistered ) {
-                                        foreach ( Type serviceContract in ServiceContracts.ToList() ) {
+                                        foreach ( var serviceContract in ServiceContracts.ToList() ) {
                                             if ( serviceContract.IsAssignableFrom( interfaceType ) ) {
                                                 ServiceContracts.Remove( serviceContract );
                                             }
@@ -192,13 +192,13 @@ namespace CapeCode.DependencyInjection {
                             }
 
                             // Selects the type to which the interface is mapped currently
-                            Type registeredType = MainContainer.Registrations.ToList().Where( reg => reg.RegisteredType == interfaceType ).Select( reg => reg.MappedToType ).FirstOrDefault();
+                            var registeredType = MainContainer.Registrations.ToList().Where( reg => reg.RegisteredType == interfaceType ).Select( reg => reg.MappedToType ).FirstOrDefault();
 
                             Type registeredForType = null;
 
                             // Search all scoped registration for a mapping.
-                            foreach ( Type scopeType in this._registrationsForInterfacesForScopeTypes.Keys ) {
-                                IDictionary<Type, InstanceDependendScopeRegistration> scopingedRegistration = this._registrationsForInterfacesForScopeTypes[ scopeType ];
+                            foreach ( var scopeType in this._registrationsForInterfacesForScopeTypes.Keys ) {
+                                var scopingedRegistration = this._registrationsForInterfacesForScopeTypes[ scopeType ];
                                 if ( scopingedRegistration.ContainsKey( interfaceType ) ) {
                                     if ( registeredType == null ) {
                                         registeredType = scopingedRegistration[ interfaceType ].RegisteredToClass;
@@ -257,7 +257,7 @@ namespace CapeCode.DependencyInjection {
 
                             var listInterfaceTypes = injectInListAttribute.RegisteredInterfaces;
 
-                            foreach ( Type interfaceType in listInterfaceTypes ) {
+                            foreach ( var interfaceType in listInterfaceTypes ) {
                                 // TODO check via name, namespace, assembly and generic type arguments (via interfaces) if the interface types is equal to the type
                                 if ( !interfaceType.GetGenericArguments().Any() && !interfaceType.IsAssignableFrom( type ) ) {
                                     // A class may only be registered for type is declares. There might be an interface declared in the attribute which does not fit to the class.
@@ -265,11 +265,10 @@ namespace CapeCode.DependencyInjection {
                                 }
 
                                 var listInjectionRegistrationManager = MainContainer.Resolve<ListInjectionRegistrationManager>();
-                                listInjectionRegistrationManager.RegisterTypeForListInterfaceType( type, interfaceType );
+                                listInjectionRegistrationManager.RegisterTypeForListInterfaceType( type, interfaceType, injectInListAttribute.RemoveSubtypesFromList );
 
-
-                                Type listInjectionType = typeof( IEnumerable<> ).MakeGenericType( interfaceType );
-                                Type listInjectionProxyType = typeof( ListInjectionProxy<> ).MakeGenericType( interfaceType );
+                                var listInjectionType = typeof( IEnumerable<> ).MakeGenericType( interfaceType );
+                                var listInjectionProxyType = typeof( ListInjectionProxy<> ).MakeGenericType( interfaceType );
                                 if ( !MainContainer.IsRegistered( listInjectionType ) ) {
                                     MainContainer.RegisterType( listInjectionType, listInjectionProxyType, new PerResolveLifetimeManager() );
                                 }
@@ -312,7 +311,7 @@ namespace CapeCode.DependencyInjection {
                 interfaceTypes.Add( inheritedType );
             }
 
-            foreach ( Type interfaceType in interfaceTypes ) {
+            foreach ( var interfaceType in interfaceTypes ) {
                 // TODO check via name, namespace, assembly and generic type arguments (via interfaces) if the interface types is equal to the type
                 if ( !type.ContainsGenericParameters ) {
 
@@ -352,7 +351,7 @@ namespace CapeCode.DependencyInjection {
                 }
 #if DEBUG
                 var containerRegistrations = container.Registrations;
-                
+
                 var registrationsByNameAndType = containerRegistrations.Where( r => r.Name == null ).ToDictionaryDictionary( k => k.RegisteredType, k => k.Name, v => v.RegisteredType );
                 var registrationsByType = containerRegistrations.Where( r => r.Name == null ).ToDictionary( k => k.RegisteredType, v => v.RegisteredType );
 #endif
