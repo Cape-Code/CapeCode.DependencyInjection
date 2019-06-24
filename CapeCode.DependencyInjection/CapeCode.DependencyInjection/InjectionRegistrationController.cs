@@ -261,7 +261,7 @@ namespace CapeCode.DependencyInjection {
                                 }
 
                                 var listInjectionRegistrationManager = MainContainer.Resolve<ListInjectionRegistrationManager>();
-                                listInjectionRegistrationManager.RegisterTypeForListInterfaceType( type, interfaceType );
+                                listInjectionRegistrationManager.RegisterTypeForListInterfaceType( type, interfaceType, injectInListAttribute.RemoveSubtypesFromList );
 
                                 var listInjectionType = typeof( IEnumerable<> ).MakeGenericType( interfaceType );
                                 var listInjectionProxyType = typeof( ListInjectionProxy<> ).MakeGenericType( interfaceType );

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CapeCode.DependencyInjection.Interfaces;
+using Microsoft.Extensions.DependencyInjection.Core;
 
 namespace CapeCode.DependencyInjection.Core {
     [InjectAsGlobalSingleton]
@@ -17,19 +18,28 @@ namespace CapeCode.DependencyInjection.Core {
             }
         }
 
-        public void RegisterTypeForListInterfaceType( Type registeredType, Type listInterfaceType ) {
+        public void RegisterTypeForListInterfaceType( Type registeredType, Type listInterfaceType, bool replaceParentTypes ) {
             if ( listInterfaceType != null ) {
                 if ( !_registeredTypesByListInterfaceType.ContainsKey( listInterfaceType ) ) {
                     _registeredTypesByListInterfaceType[ listInterfaceType ] = new HashSet<Type>();
                 }
                 if ( !_registeredTypesByListInterfaceType[ listInterfaceType ].Contains( registeredType ) ) {
-                    if ( !_registeredTypesByListInterfaceType[ listInterfaceType ].Any( t => t.IsSubclassOf( registeredType ) ) ) {
+
+                    var isReplacedByRegisteredChildTypes = _registeredTypesByListInterfaceType[ listInterfaceType ]
+                        .Any( t => t.IsSubclassOf( registeredType )
+                            && t.GetCustomAttribute<InjectInListAttribute>()
+                                .Any( a => a.RegisteredInterfaces.Contains( listInterfaceType )
+                                    && a.RemoveSubtypesFromList ) );
+
+                    if ( !isReplacedByRegisteredChildTypes ) {
                         _registeredTypesByListInterfaceType[ listInterfaceType ].Add( registeredType );
                     }
                 }
-                foreach ( var oldRegistration in _registeredTypesByListInterfaceType[ listInterfaceType ].ToList() ) {
-                    if ( registeredType.IsSubclassOf( oldRegistration ) ) {
-                        _registeredTypesByListInterfaceType[ listInterfaceType ].Remove( oldRegistration );
+                if ( replaceParentTypes ) {
+                    foreach ( var oldRegistration in _registeredTypesByListInterfaceType[ listInterfaceType ].ToList() ) {
+                        if ( registeredType.IsSubclassOf( oldRegistration ) ) {
+                            _registeredTypesByListInterfaceType[ listInterfaceType ].Remove( oldRegistration );
+                        }
                     }
                 }
             }
