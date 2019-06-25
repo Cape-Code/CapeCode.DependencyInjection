@@ -157,7 +157,7 @@ namespace CapeCode.DependencyInjection.Core {
                                 foreach ( var interfaceType in listInterfaceTypes ) {
                                     CheckInterfaceType( interfaceType, type );
 
-                                    _listInjectionRegistrationManager.RegisterTypeForListInterfaceType( type, interfaceType );
+                                    _listInjectionRegistrationManager.RegisterTypeForListInterfaceType( type, interfaceType, injectInListAttribute.RemoveSubtypesFromList );
 
                                     var listInjectionType = typeof( IEnumerable<> ).MakeGenericType( interfaceType );
                                     if ( !serviceCollection.Any( reg => reg.ServiceType == listInjectionType ) ) {

@@ -16,8 +16,9 @@ namespace CapeCode.DependencyInjection {
 
         public IUnityContainer MainContainer { get; private set; }
 
-        public InjectionRegistrationController( IList<object> enumRestrictions = null ) {
+        public InjectionRegistrationController( IList<object> enumRestrictions = null, Type requestScopeType = null ) {
             _enumRestrictions = enumRestrictions ?? new List<object>();
+            _requestScopeType = requestScopeType;
             MainContainer = new UnityContainer();
             ServiceContracts = new List<Type>();
             MainContainer.RegisterInstance<InjectionRegistrationController>( this, new ExternallyControlledLifetimeManager() );
@@ -32,6 +33,7 @@ namespace CapeCode.DependencyInjection {
         private readonly IAssembliesCache _assembliesCache = new AssembliesCache();
 
         private readonly IList<object> _enumRestrictions;
+        private readonly Type _requestScopeType;
 
         // Manages the registration for Interfaces that inject a singelton depending on a given scope object.
         // First Type ist the type of the scope object; Second Type is the type of the interface
@@ -227,16 +229,10 @@ namespace CapeCode.DependencyInjection {
                                 // Check what kind of injection is desired.
                                 if ( registrationAttribute.GetType() == typeof( InjectAsScopedSingletonAttribute ) ) {
                                     var scopedSingeltonAttribute = ( InjectAsScopedSingletonAttribute ) registrationAttribute;
-                                    // Interfaces may only be scoped for one type to prevent confusion
-                                    if ( registeredForType != null && registeredForType != scopedSingeltonAttribute.ScopeRelatedTo ) {
-                                        // Only registrations of inherited types may be overwritten. An alternative branch to an already registered type may not be registered.
-                                        throw new InjectionRegistrationException( interfaceType, type, "Reflected interface " + interfaceType.FullName + " of " + type.FullName + " can not be registered for scope " + scopedSingeltonAttribute.ScopeRelatedTo + ", since it is already registered to " + registeredType.FullName + ", for scope " + registeredForType + "." );
-                                    }
-                                    if ( !this._registrationsForInterfacesForScopeTypes.ContainsKey( scopedSingeltonAttribute.ScopeRelatedTo ) ) {
-                                        this._registrationsForInterfacesForScopeTypes[ scopedSingeltonAttribute.ScopeRelatedTo ] = new Dictionary<Type, InstanceDependendScopeRegistration>();
-                                    }
-
-                                    this._registrationsForInterfacesForScopeTypes[ scopedSingeltonAttribute.ScopeRelatedTo ][ interfaceType ] = new InstanceDependendScopeRegistration( registeredInterface: interfaceType, registeredToClass: type );
+                                    var scopeType = scopedSingeltonAttribute.ScopeRelatedTo;
+                                    RegisterTypeForScope( type, interfaceType, registeredType, registeredForType, scopeType );
+                                } else if ( registrationAttribute.GetType() == typeof( InjectAsRequestSingletonAttribute ) ) {
+                                    RegisterTypeForScope( type, interfaceType, registeredType, registeredForType, _requestScopeType );
                                 } else if ( registrationAttribute.GetType() == typeof( InjectAsGlobalSingletonAttribute ) ) {
                                     MainContainer.RegisterType( interfaceType, type, new ContainerControlledLifetimeManager() );
                                 } else if ( registrationAttribute.GetType() == typeof( InjectAsThreadSingletonAttribute ) ) {
@@ -265,7 +261,7 @@ namespace CapeCode.DependencyInjection {
                                 }
 
                                 var listInjectionRegistrationManager = MainContainer.Resolve<ListInjectionRegistrationManager>();
-                                listInjectionRegistrationManager.RegisterTypeForListInterfaceType( type, interfaceType );
+                                listInjectionRegistrationManager.RegisterTypeForListInterfaceType( type, interfaceType, injectInListAttribute.RemoveSubtypesFromList );
 
                                 var listInjectionType = typeof( IEnumerable<> ).MakeGenericType( interfaceType );
                                 var listInjectionProxyType = typeof( ListInjectionProxy<> ).MakeGenericType( interfaceType );
@@ -279,6 +275,19 @@ namespace CapeCode.DependencyInjection {
 
                 RegisterDataContracts( type );
             }
+        }
+
+        private void RegisterTypeForScope( Type type, Type interfaceType, Type registeredType, Type registeredForType, Type scopeType ) {
+            // Interfaces may only be scoped for one type to prevent confusion
+            if ( registeredForType != null && registeredForType != scopeType ) {
+                // Only registrations of inherited types may be overwritten. An alternative branch to an already registered type may not be registered.
+                throw new InjectionRegistrationException( interfaceType, type, "Reflected interface " + interfaceType.FullName + " of " + type.FullName + " can not be registered for scope " + scopeType + ", since it is already registered to " + registeredType.FullName + ", for scope " + registeredForType + "." );
+            }
+            if ( !this._registrationsForInterfacesForScopeTypes.ContainsKey( scopeType ) ) {
+                this._registrationsForInterfacesForScopeTypes[ scopeType ] = new Dictionary<Type, InstanceDependendScopeRegistration>();
+            }
+
+            this._registrationsForInterfacesForScopeTypes[ scopeType ][ interfaceType ] = new InstanceDependendScopeRegistration( registeredInterface: interfaceType, registeredToClass: type );
         }
 
         private void RegisterDataContracts( Type type, HashSet<Type> alreadyDone = null ) {
